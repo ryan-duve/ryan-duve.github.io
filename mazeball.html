@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <script>
+
+      document.addEventListener('DOMContentLoaded', function() {
+        winner = false;
+        grid=[[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1],[1,0,1,1,1,1,0,1,1,1,1,0,1,0,1,1,1,1,0,1,1,1,1,0,1,0,1,1,1,1,0,1,1,1,1,0,1],[1,0,1,0,0,0,0,0,0,0,1,0,1,0,1,0,0,0,0,0,0,0,1,0,1,0,1,0,0,0,0,0,0,0,1,0,1],[1,0,1,0,1,1,1,1,1,0,1,0,1,0,1,0,1,1,1,1,1,0,1,0,1,0,1,0,1,1,1,1,1,0,1,0,1],[1,0,1,0,1,0,0,0,1,0,1,0,1,0,1,0,1,0,0,0,1,0,1,0,1,0,1,0,1,0,0,0,1,0,1,0,1],[1,0,1,0,1,0,0,0,1,0,1,0,1,0,1,0,1,0,0,0,1,0,1,0,1,0,1,0,1,0,0,0,1,0,1,0,1],[1,0,1,0,1,0,0,0,1,0,1,0,1,0,1,0,1,0,0,0,1,0,1,0,1,0,1,0,1,0,0,0,1,0,1,0,1],[1,0,1,0,1,1,0,1,1,0,1,0,1,0,1,0,1,1,0,1,1,0,1,0,1,0,1,0,1,1,0,1,1,0,1,0,1],[1,0,1,0,0,0,0,0,0,0,1,0,1,0,1,0,0,0,0,0,0,0,1,0,1,0,1,0,0,0,0,0,0,0,1,0,1],[1,0,1,1,1,1,1,1,1,1,1,0,1,0,1,1,1,1,1,1,1,1,1,0,1,0,1,1,1,1,1,1,1,1,1,0,1],[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],[1,1,1,1,1,1,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1,1,1],[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],[1,0,1,1,1,1,0,1,1,1,1,0,1,0,1,1,1,1,0,1,1,1,1,0,1,0,1,1,1,1,0,1,1,1,1,0,1],[1,0,1,0,0,0,0,0,0,0,1,0,1,0,1,0,0,0,0,0,0,0,1,0,1,0,1,0,0,0,0,0,0,0,1,0,1],[1,0,1,0,1,1,1,1,1,0,1,0,1,0,1,0,1,1,1,1,1,0,1,0,1,0,1,0,1,1,1,1,1,0,1,0,1],[1,0,1,0,1,0,0,0,1,0,1,0,1,0,1,0,1,0,0,0,1,0,1,0,1,0,1,0,1,0,0,0,1,0,1,0,1],[1,0,1,0,1,0,0,0,1,0,1,0,1,0,1,0,1,0,0,0,1,0,1,0,1,0,1,0,1,0,0,0,1,0,1,0,1],[1,0,1,0,1,0,0,0,1,0,1,0,1,0,1,0,1,0,0,0,1,0,1,0,1,0,1,0,1,0,0,0,1,0,1,0,1],[1,0,1,0,1,1,0,1,1,0,1,0,1,0,1,0,1,1,0,1,1,0,1,0,1,0,1,0,1,1,0,1,1,0,1,0,1],[1,0,1,0,0,0,0,0,0,0,1,0,1,0,1,0,0,0,0,0,0,0,1,0,1,0,1,0,0,0,0,0,0,0,1,0,1],[1,0,1,1,1,1,1,1,1,1,1,0,1,0,1,1,1,1,1,1,1,1,1,0,1,0,1,1,1,1,1,1,1,1,1,0,1],[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],[1,1,1,1,1,1,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1,1,1],[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],[1,0,1,1,1,1,0,1,1,1,1,0,1,0,1,1,1,1,0,1,1,1,1,0,1,0,1,1,1,1,0,1,1,1,1,0,1],[1,0,1,0,0,0,0,0,0,0,1,0,1,0,1,0,0,0,0,0,0,0,1,0,1,0,1,0,0,0,0,0,0,0,1,0,1],[1,0,1,0,1,1,1,1,1,0,1,0,1,0,1,0,1,1,1,1,1,0,1,0,1,0,1,0,1,1,1,1,1,0,1,0,1],[1,0,1,0,1,0,0,0,1,0,1,0,1,0,1,0,1,0,0,0,1,0,1,0,1,0,1,0,1,0,0,0,1,0,1,0,1],[1,0,1,0,1,0,0,0,1,0,1,0,1,0,1,0,1,0,0,0,1,0,1,0,1,0,1,0,1,0,'G',0,1,0,1,0,1],[1,0,1,0,1,0,0,0,1,0,1,0,1,0,1,0,1,0,0,0,1,0,1,0,1,0,1,0,1,0,0,0,1,0,1,0,1],[1,0,1,0,1,1,0,1,1,0,1,0,1,0,1,0,1,1,0,1,1,0,1,0,1,0,1,0,1,1,0,1,1,0,1,0,1],[1,0,1,0,0,0,0,0,0,0,1,0,1,0,1,0,0,0,0,0,0,0,1,0,1,0,1,0,0,0,0,0,0,0,1,0,1],[1,0,1,1,1,1,1,1,1,1,1,0,1,0,1,1,1,1,1,1,1,1,1,0,1,0,1,1,1,1,1,1,1,1,1,0,1],[1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]];
+        class_dict = {1:'wall',0:'ball','G':'goal'};
+        n_grid_x = grid[0].length;
+        n_grid_y = grid.length;
+        cell_x = 10; // In pixels, TODO, make relative to screen size.
+        cell_y = 10;
+
+        grid_div = document.createElement('div');
+        grid_div.className = 'grid_div';
+        grid_div.style.width = n_grid_x * cell_x + 'px';
+        grid_div.style.height = n_grid_y * cell_y + 'px';
+        for(i=0; i<n_grid_x; i++){
+          for(j=0; j<n_grid_y; j++){
+            var cell_div = document.createElement('div');
+            cell_div.className = 'cell';
+            cell_div.id = i.toString() + j.toString();
+            cell_div.style.left = j*cell_x+'px';
+            cell_div.style.top = i*cell_y+'px';
+
+            var ball_div = document.createElement('div');
+            ball_div.className = class_dict[grid[i][j]];
+            ball_div.i = i;
+            ball_div.j = j;
+            cell_div.append(ball_div);
+            grid_div.appendChild(cell_div);
+
+          }
+        }
+
+        document.body.appendChild(grid_div);
+        moves_div = document.createElement('div');
+        moves_div.id = 'moves_div';
+        moves_div.innerHTML = 'Moves: ';
+        moves_span = document.createElement('span');
+        moves_div.appendChild(moves_span);
+        document.body.appendChild(moves_div);
+
+
+        // Route the keypresses.
+        document.addEventListener("keydown", e => {
+          switch (e.keyCode) {
+            case 37: // Left
+              balls = document.getElementsByClassName('ball');
+              Array.from(balls).forEach(function(ball){
+                if(class_dict[grid[ball.i][ball.j-1]] != 'wall'){
+                  ball.j--;
+                  ball.style.transform += 'translateX(-'+cell_x+'px)';
+                }
+              });
+              key_pressed = 'L';
+              break;
+            case 38: // Up
+              balls = document.getElementsByClassName('ball');
+              Array.from(balls).forEach(function(ball){
+                if(class_dict[grid[ball.i-1][ball.j]] != 'wall'){
+                  ball.i--;
+                  ball.style.transform += 'translateY(-'+cell_y+'px)';
+                }
+              });
+              key_pressed = 'U';
+              break;
+            case 39: // Right
+              balls = document.getElementsByClassName('ball');
+              Array.from(balls).forEach(function(ball){
+                if(class_dict[grid[ball.i][ball.j+1]] != 'wall'){
+                  ball.j++;
+                  ball.style.transform += 'translateX('+cell_x+'px)';
+                }
+              });
+              key_pressed = 'R';
+              break;
+            case 40: // Down
+              balls = document.getElementsByClassName('ball');
+              Array.from(balls).forEach(function(ball){
+                if(class_dict[grid[ball.i+1][ball.j]] != 'wall'){
+                  ball.i++;
+                  ball.style.transform += 'translateY('+cell_y+'px)';
+                }
+              });
+              key_pressed = 'D';
+              break;
+            default:
+              return;
+          }
+
+          moves_counter = parseInt(document.getElementById('moves_counter').innerHTML);
+          moves_counter++;
+          document.getElementById('moves_counter').innerHTML = moves_counter;
+
+          // Append to moves list.
+          moves_span.innerHTML += key_pressed;
+
+          // Win condition.
+          if (winner == false){
+            balls = document.getElementsByClassName('ball');
+            winner = true;  // Assume all the balls are on the goal.
+
+            Array.from(balls).forEach(function(ball){
+              if(class_dict[grid[ball.i][ball.j]] != 'goal'){
+                winner = false;
+              }
+            });
+
+            if(winner == true){
+              var win_div = document.createElement('div');
+              win_div.className = 'winner'; // 'ball';
+              // Thanks https://stackoverflow.com/a/6257480/1717828
+              webpage = location.protocol + '//' + location.host + location.pathname;
+              link_url = webpage + "?solution="+moves_span.innerHTML;
+              win_div.innerHTML = 'Winner!  (' + moves_counter + ' moves), <a href="'+link_url+'">Permalink</a>';
+              document.body.insertBefore(win_div, document.body.firstChild);
+            }
+          }
+        });
+
+        // If URL solution exists, play it now.
+        // Thanks https://stackoverflow.com/a/901144/1717828
+        url_params = new URLSearchParams(window.location.search);
+        solution = url_params.get('solution');
+        code_map = {'L':37,'U':38,'R':39,'D':40};
+        if (solution != null){
+          function fire_keypress(i){
+            setTimeout(function(){
+              var kbEvent= document.createEvent("KeyboardEvent");
+              var initMethod = typeof kbEvent.initKeyboardEvent !== 'undefined' ? "initKeyboardEvent" : "initKeyEvent";
+
+	      // The following SO comment is a godsend; I couldn't find this
+              // anywhere else on the internet:
+              // https://stackoverflow.com/questions/961532/firing-a-keyboard-event-in-safari-using-javascript#comment44022523_5920206
+              var event = document.createEvent('Event');
+              event.initEvent('keydown', true, true);
+              event.keyCode = code_map[solution[i]];
+
+              document.dispatchEvent(event);
+            }, 25 * (i + 1));
+          }
+
+          for(i = 0; i < solution.length; i++){
+            fire_keypress(i);
+          }
+        }
+      }, false);
+    </script>
+    <style>
+      div.grid_div{
+        display:block;
+        position:relative;
+      }
+      div.cell{
+        position:absolute;
+        height: 10px;
+        width: 10px;
+        border-color: black;
+        border-width: 1px;
+        border-style: solid;
+      }
+      p{padding-left:60px;}
+      .ball{
+        border-radius:50px;
+        width:10px;
+        height:10px;
+        background:#c00;
+        opacity:0.5;
+        top:0;
+        left:0;
+      }
+      .wall{
+        width:10px;
+        height:10px;
+        background:#000;
+        top:0;
+        left:0;
+      }
+      .goal{
+        width:10px;
+        height:10px;
+        background:#0F0;
+        top:0;
+        left:0;
+      }
+      .winner{
+        background:#0F0;
+        font-family:Arial, Helvetica, sans-serif;
+        font-size:40px;
+        font-weight:bold;
+        top:0;
+        left:0;
+      }
+      div#moves_div{
+        word-wrap:break-word;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>MazeBall</h1>
+    <p>Use arrow keys to move the red balls.</p>
+    <div id='counter_box'><span id="moves_counter">0</span> moves so far.</div>
+  </body>
+</html>
