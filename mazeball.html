@@ -151,7 +151,7 @@
 
         // Mobile devices
         // Thanks, https://stackoverflow.com/a/30192291/1717828
-
+        document.addEventListener('touchstart', handleTouchStart, false);        
         document.addEventListener('touchmove', handleTouchMove, false);
         var xDown = null;
         var yDown = null;
