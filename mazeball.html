@@ -125,7 +125,7 @@
               // Thanks https://stackoverflow.com/a/6257480/1717828
               webpage = location.protocol + '//' + location.host + location.pathname;
               link_url = webpage + "?solution="+moves_span.innerHTML;
-              win_div.innerHTML = 'Winner!  (' + moves_counter + ' moves), <a href="'+link_url+'">Permalink</a>';
+              win_div.innerHTML = 'Winner!  (' + moves_counter + ' moves), <a href="'+link_url+'">Permalink</a>, <a href="' + webpage + '">Play Again</a>';
               document.body.insertBefore(win_div, document.body.firstChild);
 
               // Set best score.
