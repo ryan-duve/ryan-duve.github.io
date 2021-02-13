@@ -127,6 +127,15 @@
               link_url = webpage + "?solution="+moves_span.innerHTML;
               win_div.innerHTML = 'Winner!  (' + moves_counter + ' moves), <a href="'+link_url+'">Permalink</a>';
               document.body.insertBefore(win_div, document.body.firstChild);
+
+              // Set best score.
+              this_score = parseInt(document.getElementById('moves_counter').innerHTML);
+              console.log(this_score);
+              if ((this_score < best_score) || best_score == 0) {
+                console.log("saving " + this_score);
+                localStorage.setItem('best_score', this_score);
+              }
+
             }
           }
         });
